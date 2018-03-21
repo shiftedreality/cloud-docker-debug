@@ -9,16 +9,11 @@ cache:
   apt: true
   directories:
     - $HOME/.composer/cache
-env:
-  matrix:
-#    - TEST_SUITE=static-unit PHP=7.0
-#    - TEST_SUITE=static-unit PHP=7.1
-    - TEST_SUITE=integration PHP=7.0
 before_install:
   - docker version
   - docker-compose version
 before_script:
-  - docker-compose up -d --build
+  - docker-compose up --build --abort-on-container-exit
 script: docker-compose run cli bash -c "php -r \"echo file_get_contents('http://web');\""
 after_failure:
   - docker ps -s
