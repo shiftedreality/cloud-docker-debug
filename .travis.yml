@@ -1,0 +1,17 @@
+sudo: required
+dist: trusty
+git:
+  depth: 1
+services:
+  - docker
+language: generic
+cache:
+  apt: true
+  directories:
+    - $HOME/.composer/cache
+before_script:
+  - docker-compsoe pull
+  - docker-compose up -d --build
+script: docker-compose run cli bash -c "php -r \"echo file_get_contents('http://web');\""
+after_failure:
+  - docker ps -s
