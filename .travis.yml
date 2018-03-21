@@ -7,6 +7,11 @@ services:
 language: generic
 cache:
   apt: true
+    directories:
+      - $HOME/.composer/cache
+env:
+  matrix:
+    - TEST_SUITE=integration PHP=7.0
 before_script:
   - docker-compose up -d --build
 script: docker-compose run cli bash -c "php -r \"echo file_get_contents('http://web');\""
