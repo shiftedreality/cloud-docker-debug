@@ -7,8 +7,6 @@ services:
 language: generic
 cache:
   apt: true
-  directories:
-    - $HOME/.composer/cache
 before_script:
   - docker-compsoe pull
   - docker-compose up -d --build
